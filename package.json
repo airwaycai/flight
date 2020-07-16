@@ -1,0 +1,45 @@
+{
+	"private": true,
+	"name": "my-fp-lib",
+	"version": "1.0.0",
+	"scripts": {
+		"start": "dumi dev",
+		"docs:build": "dumi build",
+		"build": "father-build",
+		"deploy": "npm run docs:build && npm run docs:deploy",
+		"release": "npm run build && npm publish",
+		"prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",
+		"test": "umi-test",
+		"test:coverage": "umi-test --coverage"
+	},
+	"main": "dist/index.js",
+	"module": "dist/index.esm.js",
+	"unpkg": "dist/index.umd.min.js",
+	"gitHooks": {
+		"pre-commit": "lint-staged"
+	},
+	"lint-staged": {
+		"*.{js,jsx,less,md,json}": [
+			"prettier --write"
+		],
+		"*.ts?(x)": [
+			"prettier --parser=typescript --write"
+		]
+	},
+	"dependencies": {
+		"glob": "^7.1.6",
+		"inquirer": "^7.3.2",
+		"react": "^16.12.0",
+		"semver": "^7.3.2"
+	},
+	"devDependencies": {
+		"@umijs/preset-react": "1.x",
+		"@umijs/test": "^3.0.5",
+		"dumi": "^1.0.9",
+		"father-build": "^1.17.2",
+		"gh-pages": "^3.0.0",
+		"lint-staged": "^10.0.7",
+		"prettier": "^1.19.1",
+		"yorkie": "^2.0.0"
+	}
+}
