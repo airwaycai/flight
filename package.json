@@ -1,29 +1,48 @@
 {
-	"private": true,
-	"name": "my-fp-lib",
+	"name": "flight",
 	"version": "1.0.0",
+	"private": true,
+	"homepage": "https://flight.baijiahulian.com/",
+	"bugs": {
+		"url": "http://git.baijiahulian.com/gaotu-fe/flight/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "http://git.baijiahulian.com/gaotu-fe/flight"
+	},
+	"license": "MIT",
+	"contributors": [
+		"feitu"
+	],
+	"main": "dist/index.js",
+	"unpkg": "dist/index.umd.min.js",
+	"module": "dist/index.esm.js",
+	"files": [
+		"dist"
+	],
 	"scripts": {
-		"start": "dumi dev",
-		"docs:build": "dumi build",
 		"build": "father-build",
-		"deploy": "npm run docs:build && npm run docs:deploy",
-		"release": "npm run build && npm publish",
+		"deploy": "npm run docs:build",
+		"docs:build": "dumi build",
 		"prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",
+		"release": "npm run build && npm publish",
+		"sort": "npx sort-package-json",
+		"start": "dumi dev",
 		"test": "umi-test",
 		"test:coverage": "umi-test --coverage"
 	},
-	"main": "dist/index.js",
-	"module": "dist/index.esm.js",
-	"unpkg": "dist/index.umd.min.js",
-	"gitHooks": {
-		"pre-commit": "lint-staged"
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged",
+			"commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+		}
 	},
 	"lint-staged": {
-		"*.{js,jsx,less,md,json}": [
-			"prettier --write"
-		],
 		"*.ts?(x)": [
 			"prettier --parser=typescript --write"
+		],
+		"*.{js,jsx,less,md,json}": [
+			"prettier --write"
 		]
 	},
 	"dependencies": {
@@ -33,13 +52,19 @@
 		"semver": "^7.3.2"
 	},
 	"devDependencies": {
+		"@commitlint/cli": "^9.1.1",
+		"@commitlint/config-conventional": "^9.1.1",
 		"@umijs/preset-react": "1.x",
 		"@umijs/test": "^3.0.5",
 		"dumi": "^1.0.9",
 		"father-build": "^1.17.2",
 		"gh-pages": "^3.0.0",
+		"husky": "^4.2.5",
 		"lint-staged": "^10.0.7",
 		"prettier": "^1.19.1",
 		"yorkie": "^2.0.0"
+	},
+	"publishConfig": {
+		"registry": "http://npm.baijiahulian.com"
 	}
 }
